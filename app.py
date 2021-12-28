@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_debugtoolbar import DebugToolbarExtension
 from models import Cupcake, db, connect_db
 
@@ -17,6 +17,10 @@ app.config['JSON_SORT_KEYS'] = False
 connect_db(app)
 
 """Flask app for Cupcakes"""
+
+@app.route("/")
+def show_home():
+    return render_template("index.html")
 
 @app.route("/api/cupcakes")
 def get_cupcakes():
