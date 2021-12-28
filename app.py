@@ -12,6 +12,7 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///cupcakes'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['JSON_SORT_KEYS'] = False
 
 connect_db(app)
 
@@ -49,7 +50,7 @@ def create_cupcake():
             "rating": cupcake.rating,
             "image": cupcake.image }
     
-    return jsonify(cupcake=json)
+    return (jsonify(cupcake=json), 201)
 
 @app.route("/api/cupcakes/<int:cupcake_id>", methods=["PATCH"])
 def alter_cupcakes(cupcake_id):
